@@ -5,7 +5,7 @@ function App() {
     <main>
       <Post author="Kimmy" text="Kimmy has 3 color!" />
       <Post author="Mini" text="Mini is the calmest!" />
-      <Post naauthorme="Mini" text="Mini is the youngest!" />
+      <Post author="Hockeye" text="Mini is the youngest!" />
     </main>
   );
 }
