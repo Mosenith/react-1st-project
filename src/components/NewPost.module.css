@@ -2,9 +2,6 @@
     background-color: #3301bc;
     padding: 1rem;
     width: 20rem;
-    margin: 2rem auto;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
   
   .form label {
@@ -38,12 +35,12 @@
     padding: 0.5rem 1.5rem;
     border: none;
     border-radius: 4px;
-    background-color: #34036c;
+    background-color: #011060;
     color: #e5d5f7;
   }
   
   .actions button:hover {
-    background-color: #23014a;
+    background-color: #011060;
   }
   
   .actions button[type='button'] {
