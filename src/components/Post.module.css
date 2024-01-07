@@ -4,7 +4,7 @@
     background-color: #3301bc;
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-    animation: animate-in 1s ease-out forwards;
+    animation: animate-in 1s ease-out forwards;;
   }
   
   .author {
