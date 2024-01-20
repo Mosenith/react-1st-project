@@ -1,46 +1,21 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Form, redirect } from "react-router-dom";
 import classes from "./NewPost.module.css";
 import Modal from "../components/Modal";
 
 function NewPost({ onAddPost }) {
-  const [enteredText, setEnterText] = useState("");
-  const [enteredAuthor, setEnterAuthor] = useState("");
-
-  function changeBodyHandler(event) {
-    setEnterText(event.target.value);
-  }
-
-  function changeAuthorHandler(event) {
-    setEnterAuthor(event.target.value);
-  }
-
-  function submitHandler(event) {
-    // prevent default of generating & sending an HTTP requests
-    event.preventDefault();
-    const postData = {
-      text: enteredText,
-      author: enteredAuthor,
-    };
-    onAddPost(postData);
-    onCancel();
-  }
-
   return (
     <Modal>
-      <form className={classes.form} onSubmit={submitHandler}>
+      {/* This form will generate a requeset obj with that form data included in 
+      and action() will be executed.*/}
+
+      <Form method="post" className={classes.form}>
         <p>
           <label htmlFor="body">Text</label>
-          <textarea id="body" required rows={3} onChange={changeBodyHandler} />
+          <textarea id="body" name="text" required rows={3} />
         </p>
         <p>
           <label htmlFor="name">Your name</label>
-          <input
-            type="text"
-            id="name"
-            required
-            onChange={changeAuthorHandler}
-          />
+          <input type="text" id="name" name="author" required />
         </p>
         <p className={classes.actions}>
           <Link to="/" type="button">
@@ -48,9 +23,26 @@ function NewPost({ onAddPost }) {
           </Link>
           <button>Submit</button>
         </p>
-      </form>
+      </Form>
     </Modal>
   );
 }
 
 export default NewPost;
+
+export async function action({ request }) {
+  // extract form data with the help of router
+  const formData = await request.formData();
+  const postData = Object.fromEntries(formData); // {body:"...", author:"..."}
+
+  // send request to backend app
+  await fetch("http://localhost:8080/posts", {
+    method: "POST",
+    body: JSON.stringify(postData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  return redirect("/");
+}

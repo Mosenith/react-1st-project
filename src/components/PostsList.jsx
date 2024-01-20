@@ -6,14 +6,6 @@ function PostsList() {
   const posts = useLoaderData();
 
   function addPostHandler(postData) {
-    // send request to backend app
-    fetch("http://localhost:8080/posts", {
-      method: "POST",
-      body: JSON.stringify(postData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
     // update state based on previous state
     setPosts((existingPost) => [postData, ...existingPost]);
   }
